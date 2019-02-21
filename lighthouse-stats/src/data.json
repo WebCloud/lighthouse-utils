@@ -1,0 +1,143 @@
+{
+  "data": [
+    {
+      "date": "Wed Feb 13 08:56:02 2019 +0000",
+      "total-weight": 1733.927734375,
+      "main_dependency_load_time": 81.1,
+      "setup_time": 1.1,
+      "localization_load_time": 62.5
+    },
+    {
+      "date": "Tue Feb 12 10:08:00 2019 +0000",
+      "total-weight": 1734.0693359375,
+      "main_dependency_load_time": 91.101,
+      "setup_time": 2,
+      "localization_load_time": 92
+    },
+    {
+      "date": "Mon Feb 11 15:29:44 2019 +0000",
+      "total-weight": 1733.912109375,
+      "main_dependency_load_time": 207.901,
+      "setup_time": 1.101,
+      "localization_load_time": 187.201
+    },
+    {
+      "date": "Mon Feb 11 10:22:38 2019 +0000",
+      "total-weight": 1733.9765625,
+      "main_dependency_load_time": 193.6,
+      "setup_time": 1.1,
+      "localization_load_time": 184.9
+    },
+    {
+      "date": "Thu Feb 7 16:35:38 2019 +0000",
+      "total-weight": 1733.0732421875,
+      "main_dependency_load_time": 82.7,
+      "setup_time": 1,
+      "localization_load_time": 58.1
+    },
+    {
+      "date": "Wed Feb 6 09:30:57 2019 +0000",
+      "total-weight": 1704.0107421875,
+      "main_dependency_load_time": 138.3,
+      "setup_time": 1.1,
+      "localization_load_time": 165.6
+    },
+    {
+      "date": "Tue Feb 5 14:24:00 2019 +0000",
+      "total-weight": 1703.7021484375,
+      "main_dependency_load_time": 154.8,
+      "setup_time": 1.1,
+      "localization_load_time": 170.5
+    },
+    {
+      "date": "Tue Feb 5 09:07:38 2019 +0000",
+      "total-weight": 1703.984375,
+      "main_dependency_load_time": 148.7,
+      "setup_time": 1.099,
+      "localization_load_time": 155.5
+    },
+    {
+      "date": "Mon Feb 4 14:56:28 2019 +0000",
+      "total-weight": 1703.7041015625,
+      "main_dependency_load_time": 524,
+      "setup_time": 1,
+      "localization_load_time": 745
+    },
+    {
+      "date": "Tue Jan 29 13:12:28 2019 +0000",
+      "total-weight": 1702.16015625,
+      "main_dependency_load_time": 208.1,
+      "setup_time": 1.001,
+      "localization_load_time": 180.401
+    },
+    {
+      "date": "Tue Jan 29 11:11:32 2019 +0000",
+      "total-weight": 1702.2001953125,
+      "main_dependency_load_time": 135.1,
+      "setup_time": 1,
+      "localization_load_time": 95.7
+    },
+    {
+      "date": "Mon Jan 7 10:02:15 2019 +0000",
+      "total-weight": 2058.818359375,
+      "main_dependency_load_time": 300.8,
+      "setup_time": 1.1
+    },
+    {
+      "date": "Fri Jan 4 15:59:58 2019 +0000",
+      "total-weight": 1645.943359375,
+      "main_dependency_load_time": 281.9,
+      "setup_time": 1.1,
+      "localization_load_time": 265.9
+    },
+    {
+      "date": "Fri Jan 4 15:30:23 2019 +0000",
+      "total-weight": 1645.435546875,
+      "main_dependency_load_time": 267.2,
+      "setup_time": 1,
+      "localization_load_time": 272.7
+    },
+    {
+      "date": "Fri Jan 4 10:02:54 2019 +0000",
+      "total-weight": 1644.7021484375,
+      "main_dependency_load_time": 252,
+      "setup_time": 1.199,
+      "localization_load_time": 179.4
+    },
+    {
+      "date": "Thu Jan 3 11:07:45 2019 +0000",
+      "total-weight": 1631.34375,
+      "main_dependency_load_time": 67.8,
+      "setup_time": 1.1,
+      "localization_load_time": 51.4
+    },
+    {
+      "date": "Fri Dec 28 08:58:29 2018 +0000",
+      "total-weight": 1631.44921875,
+      "main_dependency_load_time": 125.9,
+      "setup_time": 1.2,
+      "localization_load_time": 71.3
+    },
+    {
+      "date": "Thu Dec 27 16:07:03 2018 +0000",
+      "total-weight": 1631.5029296875,
+      "main_dependency_load_time": 247.7,
+      "setup_time": 1.8,
+      "localization_load_time": 221.7
+    },
+    {
+      "date": "Wed Dec 19 16:25:01 2018 +0000",
+      "total-weight": 1628.6787109375,
+      "main_dependency_load_time": 87.7,
+      "setup_time": 1.1,
+      "localization_load_time": 43.5
+    },
+    {
+      "date": "Wed Dec 19 16:15:05 2018 +0000",
+      "total-weight": 1628.95703125,
+      "main_dependency_load_time": 179.8,
+      "setup_time": 1.1,
+      "localization_load_time": 181.6
+    }
+  ]
+}

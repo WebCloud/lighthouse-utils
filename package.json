@@ -1,0 +1,19 @@
+{
+  "name": "lighthouse-utils",
+  "version": "0.0.1",
+  "description": "Lighthouse Utils",
+  "main": "index.js",
+  "repository": "https://github.com/WebCloud/lighthouse-utils",
+  "author": "Vinicius Dallacqua <dev.webx@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "link-app": "node ./bin/link-app",
+    "release:npm": "node ./bin/release.js",
+    "generate-lighthouse-report": "node ./bin/lighthouse",
+    "translations": "node ./bin/tasks/translations --manual",
+    "translations:fetch": "node ./bin/tasks/fetchTranslation",
+    "translations:copy": "copyfiles -f \"src/core/translations/locales/*.json\"",
+    "translations:fix": "node ./bin/tasks/fixTranslation",
+    "logo:carrier": "node ./bin/utils/createCarrierLogo"
+  }
+}

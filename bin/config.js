@@ -1,0 +1,11 @@
+module.exports = {
+  BITBUCKET_URL: '',
+  TEAM_PROJECT_NAME: '',
+  LIGHTHOUSE_APP_REPO_NAME: 'lighthouse-base-app',
+  SHIPPING_MODULE_REPO_NAME: '',
+  TRANSIFEX_TOKEN: process.env.TRANSIFEX_TOKEN,
+  TRANSIFEX_POST_URL: '',
+  TRANSIFEX_LANG_URL: '',
+  JIRA_HOST: ''
+};
+
