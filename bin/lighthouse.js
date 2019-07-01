@@ -36,7 +36,9 @@ const reportFormat = useHeadless ? 'json' : 'html';
 const perfRun = {
   extends: 'lighthouse:default',
   settings: Object.assign({}, defaultSettings, {
-    disableDeviceEmulation: true
+    disableDeviceEmulation: true,
+    emulatedFormFactor: 'desktop',
+    throttlingMethod: 'devtools'
   }),
   audits: [
     'user-timings',
@@ -61,6 +63,10 @@ const perfRun = {
     }
   }
 };
+
+const getValue = (reportData, key) => {
+  return reportData.audits[key].numericValue || reportData.audits[key].rawValue
+}
 
 function launchChromeAndRunLighthouse(url, opts, config = perfRun) {
   return chromeLauncher.launch({ chromeFlags: opts.chromeFlags, chromePath: puppetteer.executablePath() }).then((chrome) => {
@@ -130,21 +136,26 @@ function launchChromeAndRunLighthouse(url, opts, config = perfRun) {
                   if (report.audits['speed-index'].score !== null && prevReport.audits['speed-index'].score !== null) {
                     if (report.audits['speed-index'].score < prevReport.audits['speed-index'].score) {
                       const regressionMessage = 'This hash has regressed on speed index';
+                      const currentValue = getValue(report, 'speed-index');
+                      const prevValue = getValue(prevReport, 'speed-index');
                       regressionDigest['speed-index'] = {
-                        regression: `${Math.floor((report.audits['speed-index'].rawValue - prevReport.audits['speed-index'].rawValue))}ms`,
+                        regression: `${Math.floor((currentValue - prevValue))}ms`,
                         regressionMessage
                       };
                     } else if (report.audits['speed-index'].score > prevReport.audits['speed-index'].score) {
                       const message = 'This hash has improved speed index';
+                      const currentValue = getValue(report, 'speed-index');
+                      const prevValue = getValue(prevReport, 'speed-index');
                       improvementDigest['speed-index'] = {
-                        improvement: `${Math.floor((prevReport.audits['speed-index'].rawValue - report.audits['speed-index'].rawValue))}ms`,
+                        improvement: `${Math.floor((prevValue - currentValue))}ms`,
                         message
                       };
                     }
                   } else if (report.audits['speed-index'].score !== null) {
                     const message = 'This hash no previous speed index to compare to, here is what we recorded on this run';
+                    const currentValue = getValue(report, 'speed-index');
                     improvementDigest['speed-index'] = {
-                      improvement: `${Math.floor((report.audits['speed-index'].rawValue))}ms`,
+                      improvement: `${Math.floor((currentValue))}ms`,
                       message
                     };
                   } else if (report.audits['speed-index'].score === null && prevReport.audits['speed-index'].score === null) {
@@ -157,16 +168,21 @@ function launchChromeAndRunLighthouse(url, opts, config = perfRun) {
 
                   if (report.audits['mainthread-work-breakdown'].score < prevReport.audits['mainthread-work-breakdown'].score) {
                     const regressionMessage = 'This hash is hogging more on the main thread than benchmark';
+                    const currentValue = getValue(report, 'mainthread-work-breakdown');
+                    const prevValue = getValue(prevReport, 'mainthread-work-breakdown');
                     regressionDigest['mainthread-work-breakdown'] = {
-                      regression: `${Math.floor((report.audits['mainthread-work-breakdown'].rawValue - prevReport.audits['mainthread-work-breakdown'].rawValue))}ms`,
+                      regression: `${Math.floor((currentValue - prevValue))}ms`,
                       regressionMessage
                     };
 
                     error(`WARN: ${regressionMessage}`);
                   } else if (report.audits['mainthread-work-breakdown'].score > prevReport.audits['mainthread-work-breakdown'].score) {
                     const message = 'This hash has freed CPU workload compared to last release';
+                    const currentValue = getValue(report, 'mainthread-work-breakdown');
+                    const prevValue = getValue(prevReport, 'mainthread-work-breakdown');
+
                     improvementDigest['mainthread-work-breakdown'] = {
-                      improvement: `${Math.floor((prevReport.audits['mainthread-work-breakdown'].rawValue) - report.audits['mainthread-work-breakdown'].rawValue)}ms`,
+                      improvement: `${Math.floor(prevValue - currentValue)}ms`,
                       message
                     };
 
@@ -175,16 +191,22 @@ function launchChromeAndRunLighthouse(url, opts, config = perfRun) {
 
                   if (report.audits['bootup-time'].score < prevReport.audits['bootup-time'].score) {
                     const regressionMessage = 'This hash is taking longer to parse JS than benchmark';
+                    const currentValue = getValue(report, 'mainthread-work-breakdown');
+                    const prevValue = getValue(prevReport, 'mainthread-work-breakdown');
+
                     regressionDigest['bootup-time'] = {
-                      regression: `${Math.floor((report.audits['bootup-time'].rawValue - prevReport.audits['bootup-time'].rawValue))}ms`,
+                      regression: `${Math.floor((currentValue - prevValue))}ms`,
                       regressionMessage
                     };
 
                     error(`WARN: ${regressionMessage}`);
                   } else if (report.audits['bootup-time'].score > prevReport.audits['bootup-time'].score) {
                     const message = 'JS parsing has improved since last version';
+                    const currentValue = getValue(report, 'mainthread-work-breakdown');
+                    const prevValue = getValue(prevReport, 'mainthread-work-breakdown');
+
                     improvementDigest['bootup-time'] = {
-                      improvement: `${Math.floor((prevReport.audits['bootup-time'].rawValue - report.audits['bootup-time'].rawValue))}ms`,
+                      improvement: `${Math.floor((prevValue - currentValue))}ms`,
                       message
                     };
 
@@ -295,7 +317,9 @@ executeWithMessage('Starting lighthouse report', 'git rev-list origin/master..HE
         })
         .then(() => {
           if (updateMaster) {
-            return executeWithMessage('Updating master report file', 'git add . && git commit -m "RELEASE: Update lighthouse report 🤖" && git push origin HEAD:master')();
+            return executeWithMessage(undefined, 'yarn build')()
+              .then(executeWithMessage('Generating webpack stats', 'yarn generate-stats'))
+              .then(executeWithMessage('Updating master report file', 'git add . && git commit -m "RELEASE: Update lighthouse report and webpack stats 🤖" && git push origin HEAD:master'));
           }
 
           log('Not on master, skipping commit of report');

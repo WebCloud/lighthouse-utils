@@ -15,5 +15,8 @@
     "translations:copy": "copyfiles -f \"src/core/translations/locales/*.json\"",
     "translations:fix": "node ./bin/tasks/fixTranslation",
     "logo:carrier": "node ./bin/utils/createCarrierLogo"
+  },
+  "dependencies": {
+    "lighthouse": "^5.1.0"
   }
 }

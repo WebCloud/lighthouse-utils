@@ -15,10 +15,10 @@ const shouldTag = process.argv.find(arg => arg.indexOf('--tag-and-publish') !== 
 
 const NOOP_MESSAGE = 'Nothing to commit';
 
-let commandPromise = executeWithMessage(undefined, 'git status')()
+let commandPromise = executeWithMessage(undefined, 'git fetch && git checkout -B master origin/master')()
   .then(executeWithMessage('Building storybook', 'yarn build-storybook'))
+  .then(executeWithMessage(undefined, 'git reset --hard')) // remove any leftover from previous things
   .then(executeWithMessage('Switching to storybook branch', 'git fetch origin && git checkout -B storybook origin/storybook'))
-  .then(executeWithMessage(undefined, 'git status'))
   .then(executeWithMessage('Removing static folder', 'rm -rf static'))
   .then(executeWithMessage('Copying new storybook files', 'cp -R storybook-static/* ./'))
   .then(executeWithMessage('Removing storybook-static folder', 'rm -rf storybook-static'));
